@@ -20,7 +20,7 @@ connector.prototype.initialize = function(httpServer){
 
     io.sockets.on('connection',function(socket){
 
-        socket.on('cheniuMessage',function(data){
+        socket.on('cheniu_message',function(data){
             console.log(data);
             service.messageHandler(socket,data);
         });
