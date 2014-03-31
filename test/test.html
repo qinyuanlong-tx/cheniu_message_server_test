@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <title></title>
+    <script src="socket.io.js"></script>
+    <script>
+        var socket;
+
+        function connect(){
+            socket = io.connect('http://localhost:3000');
+            socket.on('onChat',function(data){
+                console.log(data);
+            });
+        }
+
+        function setId(){
+            var data = {};
+            data.messageName = 'identity';
+            data.uid = document.getElementById('uid').value;
+            socket.emit('cheniuMessage',data);
+        }
+
+        function sendMessage(){
+            var data = {};
+            data.messageName = 'chat';
+            data.uid = document.getElementById('toId').value;
+            data.message = document.getElementById('msg').value;
+            socket.emit('cheniuMessage',data);
+        }
+
+    </script>
+</head>
+<body>
+<input type="button" value="启动连接" onclick="connect();"/><br/>
+<input type="input" id="uid"/><input type="button" value="设置id" onclick="setId();"/><br/>
+<input type="input" id="toId"/><input type="input" id="msg"/><input type="button" value="发送消息" onclick="sendMessage();"/><br/>
+
+</body>
+</html>
